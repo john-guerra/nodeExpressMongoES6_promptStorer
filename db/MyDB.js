@@ -1,12 +1,15 @@
+import "dotenv/config"; // to load .env file
+
 import { MongoClient } from "mongodb";
 
 function MyDB() {
-  const uri = process.env.MONGO_URL ||  "mongodb://localhost:27017";
+  const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
   const myDB = {};
 
   const prompts = [1, 2, 3, 4];
 
   const connect = () => {
+    console.log("Connecting to", uri.slice(0, 20));
     const client = new MongoClient(uri);
     const db = client.db("promptsStorer");
 

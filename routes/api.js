@@ -8,9 +8,9 @@ export const router = express.Router();
 router.get("/prompts", async (req, res) => {
   console.log("should return prompts");
 
-  console.log("before");
+  
   const prompts = await myDB.getPrompts();
-  console.log("after");
+  console.log("got prompts", prompts);
 
   
   res.json(prompts);
