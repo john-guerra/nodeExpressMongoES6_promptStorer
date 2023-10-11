@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 
 function MyDB() {
-  const uri = "mongodb://localhost:27017";
+  const uri = process.env.MONGO_URL ||  "mongodb://localhost:27017";
   const myDB = {};
 
   const prompts = [1, 2, 3, 4];
