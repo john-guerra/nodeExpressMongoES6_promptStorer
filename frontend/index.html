@@ -17,11 +17,50 @@
       <h1>Prompt Storer</h1>
 
       <div id="messages"></div>
-    
 
       <div class="row">
         <div class="col-lg-4 col-sm-12">
           <h2>Menu</h2>
+
+          <section>
+            <form id="formCreatePrompt" action="#">
+              <div class="mb-3">
+                <label class="form-label">
+                  Prompt:
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="prompt"
+                    required
+                    value="Generate an image of John Teaching"
+                /></label>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">
+                  Rating:
+                  <input
+                    type="number"
+                    class="form-control"
+                    name="rating"
+                    required
+                    min="0"
+                    max="5"
+                    value="3"
+                /></label>
+              </div>
+
+              <div class="mb-3">
+                <button
+                  id="btnCreatePrompt"
+                  type="submit"
+                  class="btn btn-primary"
+                >
+                  Create
+                </button>
+              </div>
+            </form>
+          </section>
         </div>
         <!-- /Menu -->
 
