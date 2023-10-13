@@ -1,6 +1,6 @@
 import "dotenv/config"; // to load .env file
 
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 
 function MyDB() {
   const uri = process.env.MONGO_URL || "mongodb://localhost:27017";
@@ -23,6 +23,40 @@ function MyDB() {
       return await promptsCollection.find(query).limit(MaxElements).toArray();
     } finally {
       console.log("db closing connection");
+      client.close();
+    }
+  };
+
+  myDB.createPrompt = async (prompt) => {
+    const { client, db } = connect();
+
+    const promptsCollection = db.collection("prompts");
+
+    try {
+      const result = await promptsCollection.insertOne(prompt);
+      return result;
+    } finally {
+      console.log("create Prompts db closing connection");
+      client.close();
+    }
+  };
+
+  myDB.deletePrompt = async ({ _id }) => {
+    const { client, db } = connect();
+
+    if (!_id) {
+      throw new Error("No _id provided");
+    }
+
+    const promptsCollection = db.collection("prompts");
+
+    try {
+      const result = await promptsCollection.deleteOne({
+        _id: new ObjectId(_id),
+      });
+      return result;
+    } finally {
+      console.log("delete Prompts db closing connection");
       client.close();
     }
   };
